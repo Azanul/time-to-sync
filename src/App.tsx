@@ -24,11 +24,11 @@ import authProvider from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
+  TaskCreate,
+  TaskEdit,
+  TaskList,
+  TaskShow,
+} from "./pages/tasks";
 import {
   CategoryCreate,
   CategoryEdit,
@@ -63,11 +63,11 @@ function App() {
               i18nProvider={i18nProvider}
               resources={[
                 {
-                  name: "blog_posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  name: "task",
+                  list: "/task",
+                  create: "/task/create",
+                  edit: "/task/edit/:id",
+                  show: "/task/show/:id",
                   meta: {
                     canDelete: true,
                   },
@@ -100,13 +100,13 @@ function App() {
                 >
                   <Route
                     index
-                    element={<NavigateToResource resource="blog_posts" />}
+                    element={<NavigateToResource resource="task" />}
                   />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
+                  <Route path="/task">
+                    <Route index element={<TaskList />} />
+                    <Route path="create" element={<TaskCreate />} />
+                    <Route path="edit/:id" element={<TaskEdit />} />
+                    <Route path="show/:id" element={<TaskShow />} />
                   </Route>
                   <Route path="/categories">
                     <Route index element={<CategoryList />} />
