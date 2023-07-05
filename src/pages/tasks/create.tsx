@@ -13,6 +13,7 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
     register,
     control,
     formState: { errors },
+    setValue
   } = useForm();
 
   return (
@@ -24,7 +25,10 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
       >
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker label={translate("task.fields.due_date")} />
+          <DatePicker
+            label={translate("task.fields.due_date")}
+            onChange={(newValue: any) => setValue("due_date", newValue)}
+          />
         </LocalizationProvider>
         <TextField
           {...register("title", {
@@ -109,10 +113,7 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
           name="effort"
         />
         <TextField
-          {...register("rice", {
-            required: "This field is required",
-            valueAsNumber: true,
-          })}
+          {...register("rice")}
           error={!!(errors as any)?.rice}
           helperText={(errors as any)?.rice?.message}
           margin="normal"
