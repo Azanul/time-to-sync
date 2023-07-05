@@ -127,9 +127,9 @@
     },
     "titles": {
       "create": "Create Task",
-      "edit": "Edit Blog Post",
-      "list": "Blog Posts",
-      "show": "Show Blog Post"
+      "edit": "Edit Task",
+      "list": "Tasks",
+      "show": "Show Task"
     }
   },
   "categories": {
@@ -147,14 +147,14 @@
     }
   },
   "documentTitle": {
-    "default": "refine",
-    "suffix": " | refine",
+    "default": "TtS",
+    "suffix": " | TtS",
     "task": {
-      "list": "Blog Posts | refine",
-      "show": "#{{id}} Show Blog Post | refine",
-      "edit": "#{{id}} Edit Blog Post | refine",
-      "create": "Create new Blog Post | refine",
-      "clone": "#{{id}} Clone Blog Post | refine"
+      "list": "Tasks | TtS",
+      "show": "#{{id}} Show Task | TtS",
+      "edit": "#{{id}} Edit Task | TtS",
+      "create": "Create new Task | TtS",
+      "clone": "#{{id}} Clone Task | TtS"
     },
     "categories": {
       "list": "Categories | refine",
