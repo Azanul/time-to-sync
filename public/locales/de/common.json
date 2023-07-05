@@ -108,8 +108,8 @@
   "dashboard": {
     "title": "Dashboard"
   },
-  "blog_posts": {
-    "blog_posts": "Blogbeiträge",
+  "task": {
+    "task": "Aufgabe",
     "fields": {
       "id": "Id",
       "title": "Titel",
@@ -142,7 +142,7 @@
   "documentTitle": {
     "default": "refine",
     "suffix": " | refine",
-    "blog_posts": {
+    "task": {
       "list": "Blogbeiträge | refine",
       "show": "#{{id}} Show Blogeintrag | refine",
       "edit": "#{{id}} Edit Blogeintrag | refine",

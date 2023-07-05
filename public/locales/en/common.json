@@ -108,15 +108,22 @@
   "dashboard": {
     "title": "Dashboard"
   },
-  "blog_posts": {
-    "blog_posts": "Blog Posts",
+  "task": {
+    "task": "Task",
     "fields": {
       "id": "Id",
       "title": "Title",
-      "content": "Content",
+      "body": "Body",
       "status": "Status",
       "created_at": "Created At",
-      "categoryId": "Category"
+      "due_date": "Due Date",
+      "categoryId": "Category",
+      "assignees": "Assignees",
+      "confidence": "Confidence",
+      "effort": "Effort",
+      "impact": "Impact",
+      "reach": "Reach",
+      "rice": "RICE"
     },
     "titles": {
       "create": "Create Blog Post",
@@ -142,7 +149,7 @@
   "documentTitle": {
     "default": "refine",
     "suffix": " | refine",
-    "blog_posts": {
+    "task": {
       "list": "Blog Posts | refine",
       "show": "#{{id}} Show Blog Post | refine",
       "edit": "#{{id}} Edit Blog Post | refine",
