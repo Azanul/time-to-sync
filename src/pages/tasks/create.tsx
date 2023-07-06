@@ -4,6 +4,7 @@ import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { useForm } from "@refinedev/react-hook-form";
 import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { useEffect } from "react";
 
 export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
@@ -11,10 +12,19 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
     saveButtonProps,
     refineCore: { formLoading },
     register,
-    control,
     formState: { errors },
-    setValue
+    setValue,
+    watch
   } = useForm();
+
+  useEffect(() => {
+    const subscription = watch((value, {name}) =>
+        value?.reach && value?.impact && value?.confidence && value?.effort 
+        && (name=="reach" || name=="impact" || name=="confidence" || name=="effort") ?
+          setValue("rice", value?.reach * value?.impact * value?.confidence * value?.effort) : null
+    )
+    return () => subscription.unsubscribe()
+  }, [setValue, watch])
 
   return (
     <Create isLoading={formLoading} saveButtonProps={saveButtonProps}>
