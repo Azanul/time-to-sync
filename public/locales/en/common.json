@@ -136,8 +136,9 @@
     "categories": "Categories",
     "fields": {
       "id": "Id",
-      "title": "Title",
-      "created_at": "Created At"
+      "name": "Name",
+      "created_at": "Created At",
+      "color": "Color"
     },
     "titles": {
       "create": "Create Category",
@@ -157,11 +158,11 @@
       "clone": "#{{id}} Clone Task | TtS"
     },
     "categories": {
-      "list": "Categories | refine",
-      "show": "#{{id}} Show Category | refine",
-      "edit": "#{{id}} Edit Category | refine",
-      "create": "Create new Category | refine",
-      "clone": "#{{id}} Clone Category | refine"
+      "list": "Categories | TtS",
+      "show": "#{{id}} Show Category | TtS",
+      "edit": "#{{id}} Edit Category | TtS",
+      "create": "Create new Category | TtS",
+      "clone": "#{{id}} Clone Category | TtS"
     }
   },
   "table": {
