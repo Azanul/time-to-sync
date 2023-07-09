@@ -38,6 +38,8 @@ export const CategoryCreate: React.FC<IResourceComponentsProps> = () => {
         <TextField
           {...register("color", {
             required: "This field is required",
+            maxLength: 7,
+            minLength: 7
           })}
           error={!!(errors as any)?.color}
           helperText={(errors as any)?.color?.message}

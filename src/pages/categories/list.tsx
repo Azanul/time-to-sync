@@ -31,8 +31,8 @@ export const CategoryList: React.FC<IResourceComponentsProps> = () => {
                 minWidth: 200,
                 renderCell: function render({ row }) {
                   return (
-                      <div style={{backgroundColor: "#"+row.color, textAlign: "center", height: "80%", width: "80%"}}>
-                        #{row.color}
+                      <div style={{backgroundColor: row.color, textAlign: "center", height: "80%", width: "80%"}}>
+                        {row.color}
                       </div>
                   );
                 },
