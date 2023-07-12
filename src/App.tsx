@@ -36,6 +36,7 @@ import {
   CategoryShow,
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
+import { Fade } from "@mui/material";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -53,7 +54,7 @@ function App() {
         <ColorModeContextProvider>
           <CssBaseline />
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
-          <RefineSnackbarProvider>
+          <RefineSnackbarProvider TransitionComponent={Fade} preventDuplicate>
             <Refine
               dataProvider={dataProvider(supabaseClient)}
               liveProvider={liveProvider(supabaseClient)}
@@ -84,6 +85,7 @@ function App() {
                 },
               ]}
               options={{
+                liveMode: "manual",
                 syncWithLocation: true,
                 warnWhenUnsavedChanges: true,
               }}

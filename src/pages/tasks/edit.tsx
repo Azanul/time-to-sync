@@ -5,7 +5,7 @@ import { useForm } from "@refinedev/react-hook-form";
 import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-
+import { useSubscription, useUpdate } from "@refinedev/core";
 
 export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
@@ -13,12 +13,53 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
     saveButtonProps,
     refineCore: { queryResult },
     register,
-    control,
     formState: { errors },
-    setValue
-  } = useForm();
+    setValue,
+    handleSubmit
+  } = useForm({ mode: "onChange" });
+
+  const { mutate } = useUpdate();
+  const noInvalidateOnChange = handleSubmit((data: any, e: any) => {
+    const key = e.target.name
+    data[key] = e.target.value
+    mutate({
+      resource: "task",
+      values: data,
+      id: data.id,
+      invalidates: []
+    })
+  })
+  const invalidateOnChange = handleSubmit((data: any, e: any) => {
+    const key = e.target.name
+    data[key] = e.target.value
+    mutate({
+      resource: "task",
+      values: data,
+      id: data.id,
+    })
+  })
 
   const taskData = queryResult?.data?.data;
+
+  useSubscription({
+    channel: "task",
+    enabled: true,
+    types: ["updated"],
+    onLiveEvent: (event) => {
+      const payload = event?.payload;
+      if (payload) {
+        setValue("id", payload.id);
+        setValue("title", payload.title);
+        setValue("body", payload.body);
+        setValue("due_date", payload.due_date);
+        setValue("reach", payload.reach);
+        setValue("impact", payload.impact);
+        setValue("confidence", payload.confidence);
+        setValue("effort", payload.effort);
+        setValue("rice", payload.rice);
+      }
+    },
+  });
 
   return (
     <Edit saveButtonProps={saveButtonProps}>
@@ -54,6 +95,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="text"
           label={translate("task.fields.title")}
           name="title"
+          onChange={noInvalidateOnChange}
         />
         <TextField
           {...register("body", {
@@ -67,12 +109,14 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="text"
           label={translate("task.fields.body")}
           name="body"
+          onChange={noInvalidateOnChange}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
             value={dayjs(taskData?.due_date)}
             label={translate("task.fields.due_date")}
             onChange={(newValue) => setValue("due_date", newValue)}
+            onClose={invalidateOnChange}
           />
         </LocalizationProvider>
         <TextField
@@ -88,6 +132,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.reach")}
           name="reach"
+          onChange={invalidateOnChange}
         />
         <TextField
           {...register("impact", {
@@ -102,6 +147,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.impact")}
           name="impact"
+          onChange={invalidateOnChange}
         />
         <TextField
           {...register("confidence", {
@@ -116,6 +162,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.confidence")}
           name="confidence"
+          onChange={invalidateOnChange}
         />
         <TextField
           {...register("effort", {
@@ -130,6 +177,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.effort")}
           name="effort"
+          onChange={invalidateOnChange}
         />
         <TextField
           {...register("rice", {
@@ -144,6 +192,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.rice")}
           name="rice"
+          onChange={invalidateOnChange}
         />
       </Box>
     </Edit>
