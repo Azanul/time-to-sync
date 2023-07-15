@@ -123,7 +123,9 @@
       "effort": "Effort",
       "impact": "Impact",
       "reach": "Reach",
-      "rice": "RICE"
+      "rice": "RICE",
+      "created_by": "Created by",
+      "last_edited_by": "Last edited by"
     },
     "titles": {
       "create": "Create Task",
