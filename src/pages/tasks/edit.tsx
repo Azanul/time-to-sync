@@ -2,10 +2,9 @@ import { Edit } from "@refinedev/mui";
 import dayjs from 'dayjs';
 import { Box, TextField } from "@mui/material";
 import { useForm } from "@refinedev/react-hook-form";
-import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps, useTranslate, useSubscription, useUpdate, useGetIdentity } from "@refinedev/core";
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { useSubscription, useUpdate } from "@refinedev/core";
 
 export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
@@ -18,24 +17,22 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
     handleSubmit
   } = useForm({ mode: "onChange" });
 
+  const { data: identity } = useGetIdentity<{
+    id: number;
+    fullName: string;
+  }>();
+
   const { mutate } = useUpdate();
   const noInvalidateOnChange = handleSubmit((data: any, e: any) => {
-    const key = e.target.name
-    data[key] = e.target.value
+    const key = e.target.name;
+    data[key] = ["reach", "impact", "confidence", "effort"].includes(key) ? +e.target.value : e.target.value;
+    data.rice = data.reach * data.impact * data.confidence * data.effort;
+    data.last_edited_by = identity?.id;
     mutate({
       resource: "task",
       values: data,
       id: data.id,
       invalidates: []
-    })
-  })
-  const invalidateOnChange = handleSubmit((data: any, e: any) => {
-    const key = e.target.name
-    data[key] = e.target.value
-    mutate({
-      resource: "task",
-      values: data,
-      id: data.id,
     })
   })
 
@@ -47,7 +44,8 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
     types: ["updated"],
     onLiveEvent: (event) => {
       const payload = event?.payload;
-      if (payload) {
+      console.log(event)
+      if (payload && payload.last_edited_by != identity?.id) {
         setValue("id", payload.id);
         setValue("title", payload.title);
         setValue("body", payload.body);
@@ -116,7 +114,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
             value={dayjs(taskData?.due_date)}
             label={translate("task.fields.due_date")}
             onChange={(newValue) => setValue("due_date", newValue)}
-            onClose={invalidateOnChange}
+            onClose={noInvalidateOnChange}
           />
         </LocalizationProvider>
         <TextField
@@ -132,7 +130,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.reach")}
           name="reach"
-          onChange={invalidateOnChange}
+          onChange={noInvalidateOnChange}
         />
         <TextField
           {...register("impact", {
@@ -147,7 +145,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.impact")}
           name="impact"
-          onChange={invalidateOnChange}
+          onChange={noInvalidateOnChange}
         />
         <TextField
           {...register("confidence", {
@@ -162,7 +160,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.confidence")}
           name="confidence"
-          onChange={invalidateOnChange}
+          onChange={noInvalidateOnChange}
         />
         <TextField
           {...register("effort", {
@@ -177,11 +175,10 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.effort")}
           name="effort"
-          onChange={invalidateOnChange}
+          onChange={noInvalidateOnChange}
         />
         <TextField
           {...register("rice", {
-            required: "This field is required",
             valueAsNumber: true,
           })}
           error={!!(errors as any)?.rice}
@@ -192,7 +189,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           type="number"
           label={translate("task.fields.rice")}
           name="rice"
-          onChange={invalidateOnChange}
+          disabled
         />
       </Box>
     </Edit>

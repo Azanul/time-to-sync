@@ -2,7 +2,7 @@ import { Create } from "@refinedev/mui";
 import { Box, TextField } from "@mui/material";
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { useForm } from "@refinedev/react-hook-form";
-import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps, useTranslate, useGetIdentity } from "@refinedev/core";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useEffect } from "react";
 
@@ -16,6 +16,11 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
     setValue,
     watch
   } = useForm();
+
+  const { data: identity } = useGetIdentity<{
+    id: number;
+    fullName: string;
+  }>();
 
   useEffect(() => {
     const subscription = watch((value, {name}) =>
@@ -134,6 +139,8 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
           name="rice"
           disabled
         />
+        <TextField name="created_by" value={identity?.id} hidden/>
+        <TextField name="last_edited_by" value={identity?.id} hidden/>
       </Box>
     </Create>
   );
