@@ -23,10 +23,10 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
   }>();
 
   useEffect(() => {
-    const subscription = watch((value, {name}) =>
-        value?.reach && value?.impact && value?.confidence && value?.effort 
-        && (name=="reach" || name=="impact" || name=="confidence" || name=="effort") ?
-          setValue("rice", value?.reach * value?.impact * value?.confidence * value?.effort) : null
+    const subscription = watch((value, { name }) =>
+      value?.reach && value?.impact && value?.confidence && value?.effort
+        && (name == "reach" || name == "impact" || name == "confidence" || name == "effort") ?
+        setValue("rice", value?.reach * value?.impact * value?.confidence * value?.effort) : null
     )
     return () => subscription.unsubscribe()
   }, [setValue, watch])
@@ -139,8 +139,8 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
           name="rice"
           disabled
         />
-        <TextField name="created_by" value={identity?.id} hidden/>
-        <TextField name="last_edited_by" value={identity?.id} hidden/>
+        <TextField name="created_by" value={identity?.id} sx={{ display: 'none' }} disabled/>
+        <TextField name="last_edited_by" value={identity?.id} sx={{ display: 'none' }} disabled/>
       </Box>
     </Create>
   );
