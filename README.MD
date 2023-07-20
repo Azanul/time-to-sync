@@ -8,7 +8,7 @@
 <br/>
 
 
-## <a href="https://prismatic-selkie-9d9316.netlify.app">Demo</a>
+## ✨ <a href="https://prismatic-selkie-9d9316.netlify.app">Demo</a> ✨
 
 ## About
 
