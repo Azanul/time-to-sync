@@ -2,7 +2,7 @@
 
 <div align="center" style="margin: 30px;">
     <a href="https://prismatic-selkie-9d9316.netlify.app">
-    <img src="https://refine.ams3.cdn.digitaloceanspaces.com/refine_logo.png"  align="center" />
+    <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--yq5bGQw7--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7073aq36sbtr01cj088l.png"  align="center" />
     </a>
 </div>
 <br/>
@@ -27,13 +27,14 @@ A task management app with
 
 ### Preview
 
-![Tasks List](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/iy583ycdptqow3e0dpg5.png)
+![Task List](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/esy6ohaa8vzqmgef6bqi.png)
 
-![Categories List](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q4nhok15xj08l9temdh1.png)
+![Categories List](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tj6bc5b3m8ft1vr2injr.png)
 
-![Create Task](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mfuupm8161fsx5cc1kwy.png)
+![Create Task](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7trbqw5dmik5p93lhm31.png)
 
-![Edit Category](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zyfdr9nuu7umpsoyz22i.png)
+![Edit Category](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ux6996wwi9xe4cnumern.png)
+
 
 ### What is next for the project
 - RLS policy based multi-tenancy
