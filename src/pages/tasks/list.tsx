@@ -2,17 +2,21 @@ import React from "react";
 import {
   useDataGrid,
   EditButton,
-  ShowButton,
   DeleteButton,
   List,
   DateField,
 } from "@refinedev/mui";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import { IResourceComponentsProps, useTranslate } from "@refinedev/core";
+import { IResourceComponentsProps, useTranslate, useMany, BaseKey } from "@refinedev/core";
 
 export const TaskList: React.FC<IResourceComponentsProps> = () => {
   const translate = useTranslate();
-  const { dataGridProps } = useDataGrid();
+  const { dataGridProps, tableQueryResult } = useDataGrid();
+
+  const { data: categoryData} = useMany({
+    resource: "categories",
+    ids: tableQueryResult?.data?.data?.map((task) => task.category) as BaseKey[],
+  });
 
   const columns = React.useMemo<GridColDef[]>(
     () => [
@@ -23,6 +27,14 @@ export const TaskList: React.FC<IResourceComponentsProps> = () => {
         minWidth: 30,
         align: "center",
         headerAlign: "center",
+        renderCell: function render({ row }) {
+          const category = categoryData?.data.find(item => item.id === row.category)
+          return (
+            <div style={{ backgroundColor: category?.color, textAlign: "center", height: "80%", width: "80%" }}>
+              {row.id}
+            </div>
+          );
+        },
       },
       {
         field: "title",
@@ -96,7 +108,6 @@ export const TaskList: React.FC<IResourceComponentsProps> = () => {
           return (
             <>
               <EditButton hideText recordItemId={row.id} />
-              <ShowButton hideText recordItemId={row.id} />
               <DeleteButton hideText recordItemId={row.id} />
             </>
           );
@@ -106,7 +117,7 @@ export const TaskList: React.FC<IResourceComponentsProps> = () => {
         minWidth: 80,
       },
     ],
-    [translate],
+    [categoryData?.data, translate],
   );
 
   return (
