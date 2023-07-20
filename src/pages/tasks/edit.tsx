@@ -26,7 +26,7 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
   const noInvalidateOnChange = handleSubmit((data: any, e: any) => {
     const key = e.target.name;
     data[key] = ["reach", "impact", "confidence", "effort"].includes(key) ? +e.target.value : e.target.value;
-    data.rice = data.reach * data.impact * data.confidence * data.effort;
+    data.rice = data.reach * data.impact * data.confidence / data.effort;
     data.last_edited_by = identity?.id;
     mutate({
       resource: "task",

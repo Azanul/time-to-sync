@@ -26,7 +26,7 @@ export const TaskCreate: React.FC<IResourceComponentsProps> = () => {
     const subscription = watch((value, { name }) =>
       value?.reach && value?.impact && value?.confidence && value?.effort
         && (name == "reach" || name == "impact" || name == "confidence" || name == "effort") ?
-        setValue("rice", value?.reach * value?.impact * value?.confidence * value?.effort) : null
+        setValue("rice", value?.reach * value?.impact * value?.confidence / value?.effort) : null
     )
     return () => subscription.unsubscribe()
   }, [setValue, watch])
