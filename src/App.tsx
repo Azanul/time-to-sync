@@ -7,6 +7,7 @@ import {
   notificationProvider,
   RefineSnackbarProvider,
   ThemedLayoutV2,
+  ThemedTitleV2,
 } from "@refinedev/mui";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -37,7 +38,7 @@ import {
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
 import { Fade } from "@mui/material";
-import { GitHub } from "@mui/icons-material";
+import { GitHub, AccessTimeFilledOutlined, AccessTimeOutlined } from "@mui/icons-material";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -94,7 +95,14 @@ function App() {
                 <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <ThemedLayoutV2 Header={() => <Header sticky />}>
+                      <ThemedLayoutV2 Title={({ collapsed }) => (
+                        <ThemedTitleV2
+                          collapsed={collapsed}
+                          icon={collapsed ? <AccessTimeFilledOutlined /> : <AccessTimeOutlined />}
+                          text="Time To Sync"
+                        />
+                      )}
+                        Header={() => <Header sticky />}>
                         <Outlet />
                       </ThemedLayoutV2>
                     </Authenticated>
