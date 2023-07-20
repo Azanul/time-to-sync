@@ -103,6 +103,8 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           helperText={(errors as any)?.body?.message}
           margin="normal"
           fullWidth
+          multiline
+          rows={10}
           InputLabelProps={{ shrink: true }}
           type="text"
           label={translate("task.fields.body")}
@@ -125,7 +127,6 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           error={!!(errors as any)?.reach}
           helperText={(errors as any)?.reach?.message}
           margin="normal"
-          fullWidth
           InputLabelProps={{ shrink: true }}
           type="number"
           label={translate("task.fields.reach")}
@@ -140,7 +141,6 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           error={!!(errors as any)?.impact}
           helperText={(errors as any)?.impact?.message}
           margin="normal"
-          fullWidth
           InputLabelProps={{ shrink: true }}
           type="number"
           label={translate("task.fields.impact")}
@@ -155,7 +155,6 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           error={!!(errors as any)?.confidence}
           helperText={(errors as any)?.confidence?.message}
           margin="normal"
-          fullWidth
           InputLabelProps={{ shrink: true }}
           type="number"
           label={translate("task.fields.confidence")}
@@ -170,7 +169,6 @@ export const TaskEdit: React.FC<IResourceComponentsProps> = () => {
           error={!!(errors as any)?.effort}
           helperText={(errors as any)?.effort?.message}
           margin="normal"
-          fullWidth
           InputLabelProps={{ shrink: true }}
           type="number"
           label={translate("task.fields.effort")}
