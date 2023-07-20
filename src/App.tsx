@@ -37,6 +37,7 @@ import {
 } from "./pages/categories";
 import { supabaseClient } from "./utility";
 import { Fade } from "@mui/material";
+import { GitHub } from "@mui/icons-material";
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -129,6 +130,13 @@ function App() {
                     element={
                       <AuthPage
                         type="login"
+                        providers={[
+                          {
+                            name: "github",
+                            icon: <GitHub />,
+                            label: "Sign in with GitHub",
+                          },
+                        ]}
                         formProps={{
                           defaultValues: {
                             email: "info@refine.dev",
